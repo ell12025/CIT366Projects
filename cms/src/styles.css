@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+.pad-left-right {
+  margin-left: .2rem;
+  margin-right: .2rem;
+  margin-top: 2rem;
+}
+
