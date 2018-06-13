@@ -3,9 +3,9 @@ export class Document {
   public name: string;
   public description: string;
   public url: string;
-  public children: any;
+  public children: Document[];
 
-  constructor (id: string, name: string, description: string, url: string, children: any) {
+  constructor (id: string, name: string, description: string, url: string, children: Document[]) {
     this.id = id;
     this.name = name;
     this.description = description;

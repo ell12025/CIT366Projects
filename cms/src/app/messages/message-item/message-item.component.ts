@@ -1,25 +1,28 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 
 import { Message } from  "../message.model";
 
+import { Contact } from "../../contacts/contact.model";
+
 import {ContactService} from "../../contacts/contact.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-message-item',
   templateUrl: './message-item.component.html',
-  styleUrls: ['./message-item.component.css']
+  styleUrls: ['./message-item.component.css'],
 })
 export class MessageItemComponent implements OnInit {
   @Input() message: Message;
   messageSender: string = "";
   canEdit: boolean = false;
-  @Output() messageWasSelected = new EventEmitter<void>();
 
   constructor(private contactService: ContactService) { }
 
   ngOnInit() {
-    let contact: Contact = this.contactService.getContact(this.message.sender);
+    let contact: Contact = this.contactService.getContact(this.message.id);
     this.messageSender = contact.name;
+
   }
 
 }
