@@ -9,14 +9,21 @@ import { MOCKCONTACTS } from "./MOCKCONTACTS";
 @Injectable()
 export class ContactService {
   contactSelectedEvent = new EventEmitter<Contact>();
-  private contacts: Contact[] = [];
+  contacts: Contact[] = [];
 
   getContacts() {
     return this.contacts.slice();
   }
 
-  getContact() {
-
+  getContact(id: string) {
+    for(var i = 0; i < this.contacts.length; i++)
+    {
+      if(this.contacts[i].id == id)
+      {
+        return this.contacts[i];
+      }
+    }
+    return null;
   }
 
 
