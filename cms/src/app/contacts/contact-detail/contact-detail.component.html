@@ -8,8 +8,8 @@
             <img src="{{ contact.imageUrl }}" alt=""
                  class="img-responsive pull-left" style="max-height: 80px;">
               <div class="pull-right">
-                <button class="btn btn-primary pad-left-right">Edit</button>
-                <button class="btn btn-danger pad-left-right" type="button">Delete</button>
+                <button class="btn btn-primary pad-left-right" (click)="onEditContact()">Edit</button>
+                <button class="btn btn-danger pad-left-right" type="button" (click)="onDelete()">Delete</button>
               </div>
           </div>
         </div>

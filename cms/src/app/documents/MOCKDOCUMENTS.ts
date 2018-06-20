@@ -1,12 +1,8 @@
 import { Document } from "./document.model";
 
-export const MOCKDOCUMENTS: Document[] = [
- {
-    id: '1',
-    name: 'CIT 425 - Data Warehousing',
-    description: '',
-    url: 'https://rkjdatawarehousing.wordpress.com/',
-    children: [
+export const MOCKDOCUMENTS: any[] = [
+  {
+    id: '1', name: 'CIT 425 - Data Warehousing', description: '', url: 'https://rkjdatawarehousing.wordpress.com/', children: [
       {
         id: '2',
         name: 'Project 1 – The Kimball Method',
@@ -63,26 +59,52 @@ export const MOCKDOCUMENTS: Document[] = [
         url: 'https://rkjdatawarehousing.wordpress.com/projects/project-8/',
         children: null
       }
-    ]
-  } ,
+  ]
+  },
   {
-    id: '10',
-    name: 'CIT 460 - Enterprise Development',
-    description: '',
-    url: 'https://rkjackson.wordpress.com/',
-    children: [
-      {id: '12', name: 'Case 1 – Defining the requirements', description: '', url: 'https://rkjackson.wordpress.com/cases/case-1/', children: null},
-      {id: '13', name: 'Case 2 – User Interface design', description: '', url: 'https://rkjackson.wordpress.com/cases/case-2/', children: null},
+    id: '10', name: 'CIT 460 - Enterprise Development', description: '', url: 'https://rkjackson.wordpress.com/', children: [
+      {id: '12',
+        name: 'Case 1 – Defining the requirements',
+        description: '', url: 'https://rkjackson.wordpress.com/cases/case-1/',
+        children: null},
+      {id: '13',
+        name: 'Case 2 – User Interface design',
+        description: '',
+        url: 'https://rkjackson.wordpress.com/cases/case-2/',
+        children: null},
       {
-        id: '14', name: 'Case 3 – Implementing Model Layer', description: '', url: 'https://rkjackson.wordpress.com/cases/case-3/',
+        id: '14',
+        name: 'Case 3 – Implementing Model Layer',
+        description: '',
+        url: 'https://rkjackson.wordpress.com/cases/case-3/',
         children: [
-          {id: '36', name: 'Team Assignment', 'description': 'Create your first JavaBean class', description: '', url: null, children: null}
-          , {id: '37', name: 'Individual Assignment', 'description': 'Create remaining JavaBean classes', description: '', url: null, children: null}
+          {id: '36',
+            name: 'Team Assignment',
+            description: '',
+            url: null,
+            children: null},
+          {id: '37',
+            name: 'Individual Assignment',
+            description: '',
+            url: null,
+            children: null}
         ]
       },
-      {id: '15', name: 'Case 4 – Enterprise Java Session Beans', description: '', url: 'https://rkjackson.wordpress.com/cases/case-4/', children: null},
-      {id: '16', name: 'Case 5 – Implementing the View', description: '', url: 'https://rkjackson.wordpress.com/cases/case-5/', children: null},
-      {id: '17', name: 'Case 6 – A Framework for the View Layer', description: '', url: 'https://rkjackson.wordpress.com/cases/case-6/', children: null}
+      {id: '15',
+        name: 'Case 4 – Enterprise Java Session Beans',
+        description: '',
+        url: 'https://rkjackson.wordpress.com/cases/case-4/',
+        children: null},
+      {id: '16',
+        name: 'Case 5 – Implementing the View',
+        description: '',
+        url: 'https://rkjackson.wordpress.com/cases/case-5/',
+        children: null},
+      {id: '17',
+        name: 'Case 6 – A Framework for the View Layer',
+        description: '',
+        url: 'https://rkjackson.wordpress.com/cases/case-6/',
+        children: null}
     ]
   },
   {

@@ -4,15 +4,16 @@
         <div class="panel-heading clearfix">
           <h1 class="panel-title pull-left" style="padding-top:8px;">Contacts </h1>
           <div class="btn-group pull-right">
-            <button class="btn btn-success">New Contact</button>
+            <button routerLink="new" class="btn btn-success" (click)="onNewContact()">New Contact</button>
           </div>
         </div>
         <div class="panel-body">
           <div class="row">
           <div class="col-xs-12">
             <app-contact-item
-              *ngFor="let contactEl of contacts"
-            [contact]="contactEl">
+              *ngFor="let contactEl of contacts; let i = id"
+            [contact]="contactEl"
+            [id]="i">
             </app-contact-item>
           </div>
         </div>
