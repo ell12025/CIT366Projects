@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-
 import { EventEmitter } from '@angular/core';
-
 import { Contact } from "./contact.model";
-
 import { MOCKCONTACTS } from "./MOCKCONTACTS";
+import { Subject } from "rxjs/internal/Subject";
+import { DocumentService } from "../documents/document.service";
 
 @Injectable()
 export class ContactService {
-  contactChangeEvent = new EventEmitter<Contact>();
+  // contactChangeEvent = new EventEmitter<Contact[]>();
   contactSelectedEvent = new EventEmitter<Contact>();
-  contacts: Contact[] = [];
+  contactListChangedEvent = new Subject<Contact[]>();
+  contacts: Contact[];
 
   getContacts() {
     return this.contacts.slice();
@@ -27,10 +27,6 @@ export class ContactService {
     return null;
   }
 
-  constructor() {
-    this.contacts = MOCKCONTACTS;
-  }
-
   deleteContact(contact: Contact) {
     if (contact === null) {
       return;
@@ -42,7 +38,20 @@ export class ContactService {
     }
 
     this.contacts.splice(pos,1);
-    this.contactChangeEvent.emit(this.contacts.slice());
+    this.contactListChangedEvent.next(this.contacts.slice());
+  }
+
+  addDocument(newDocument: Document) {
+    if(newDocument === null )
+    {
+      return;
+    }
+
+
+  }
+
+  constructor(private documentService: DocumentService) {
+    this.contacts = MOCKCONTACTS;
   }
 
 }
