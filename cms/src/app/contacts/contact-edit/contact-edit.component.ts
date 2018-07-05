@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params, Router} from "@angular/router";
+import { ContactService } from "../contact.service";
+import { Contact } from "../contact.model";
 
 @Component({
   selector: 'app-contact-edit',
@@ -7,9 +9,18 @@ import { ActivatedRoute, Params } from "@angular/router";
   styleUrls: ['./contact-edit.component.css']
 })
 export class ContactEditComponent implements OnInit {
+  contact: Contact = null;
+  groupContacts: Contact[] = [];
+  editMode: boolean = false;
+  hasGroup: boolean = false;
   id: string;
-  editMode = false;
-  constructor(private route: ActivatedRoute) { }
+
+
+  constructor(private route: ActivatedRoute, private router: Router, private contractService: ContactService) { }
+
+
+
+
 
   ngOnInit() {
     this.route.params.subscribe(
