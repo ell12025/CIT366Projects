@@ -8,20 +8,29 @@ import { DocumentService } from "../documents/document.service";
 
 @Injectable()
 export class ContactService {
-  // contactChangeEvent = new EventEmitter<Contact[]>();
   contactSelectedEvent = new EventEmitter<Contact>();
   contactListChangedEvent = new Subject<Contact[]>();
   contacts: Contact[];
-  documentsListClone: Document[];
+  maxContactId: number;
+  contactsListClone: Contact[];
 
-  constructor(private documentService: DocumentService) {
+
+
+  // Class constructor
+  constructor() {
     this.contacts = MOCKCONTACTS;
+    this.maxContactId = this.getMaxId();
   }
 
+
+  // Get all contacts
   getContacts() {
     return this.contacts.slice();
   }
 
+
+
+  // Get a single contact based on ID
   getContact(id: string) {
     for(var i = 0; i < this.contacts.length; i++)
     {
@@ -33,73 +42,87 @@ export class ContactService {
     return null;
   }
 
+
+
+
+
+  // Get contact max ID
+  getMaxId(): number {
+    var maxId = 0;
+
+    for(var i = 0; i < this.contacts.length; i++)
+    {
+      var currentId = parseInt(this.contacts[i].id);
+      if(currentId > maxId)
+      {
+        maxId = currentId;
+      }
+    }
+    return maxId;
+  }
+
+
+
+
+
+  // Add a new contact
+  addContact(newContact: Contact) {
+    if(newContact === null || newContact === undefined)
+    {
+      return;
+    }
+
+    this.maxContactId++;
+    newContact.id = String(this.maxContactId);
+    this.contacts.push(newContact);
+    this.contactsListClone = this.contacts.slice();
+    this.contactListChangedEvent.next(this.contactsListClone);
+  }
+
+
+
+
+  // Update a contact
+  updateContact(originalContact: Contact, newContact: Contact) {
+    if(originalContact === null || originalContact === undefined
+    || newContact === null || newContact === undefined)
+    {
+      return;
+    }
+
+    var pos = this.contacts.indexOf(originalContact);
+
+    if(pos < 0 )
+    {
+      return;
+    }
+
+    newContact.id = originalContact.id;
+    this.contacts[pos] = newContact;
+    this.contactsListClone = this.contacts.slice();
+    this.contactListChangedEvent.next(this.contactsListClone);
+  }
+
+
+
+
+  // Delete a contact when 'delete' is clicked
   deleteContact(contact: Contact) {
     if (contact === null) {
       return;
     }
 
-    const pos = this.contacts.indexOf(contact);
+    var pos = this.contacts.indexOf(contact);
     if (pos < 0) {
       return;
     }
 
     this.contacts.splice(pos,1);
+    this.contactsListClone = this.contacts.slice();
     this.contactListChangedEvent.next(this.contacts.slice());
   }
 
-  addDocument(newDocument: Document) {
-    if(newDocument === null || newDocument === undefined )
-    {
-      return;
-    }
-
-    this.documentService.maxDocumentId++;
-    newDocument.id = String(this.documentService.maxDocumentId);
-    this.documentService.documents.push(newDocument);
-    this.documentsListClone = this.documentService.documents.slice();
-    this.documentService.documentListChangedEvent.next(this.documentsListClone);
-
-  }
 
 
-  updateDocument(originalDocument: Document, newDocument: Document) {
-    if(originalDocument === null || originalDocument === undefined ||
-      newDocument === null || newDocument === undefined)
-    {
-      return;
-    }
-
-    var pos;
-    pos = this.documentService.documents.indexOf(originalDocument)
-
-    if(pos < 0)
-    {
-      return;
-    }
-
-    newDocument.id = originalDocument.id;
-    this.documentService.documents[pos] = newDocument;
-    this.documentsListClone = this.documentService.documents.slice();
-    this.documentService.documentListChangedEvent.next(this.documentsListClone);
-  }
-
-
-
-  deleteDocument(document: Document) {
-    if(document === null || document === undefined)
-    {
-      return;
-    }
-
-    var pos = this.documentService.documents.indexOf(document)
-    if(pos < 0)
-    {
-      return;
-    }
-
-    this.documentService.documents = this.documentService.documents.splice(pos, 1);
-    this.documentsListClone = this.documentService.documents.slice();
-    this.documentService.documentListChangedEvent.next(this.documentsListClone);
-  }
 
 }
