@@ -1,8 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Contact } from "../contact.model";
 import { ContactService } from "../contact.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs/internal/Subscription";
+
 
 @Component({
   selector: 'app-contact-list',

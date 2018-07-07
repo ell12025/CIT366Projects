@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule} from "@angular/forms";
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { ContactsComponent } from './contacts/contacts.component';
@@ -17,15 +17,16 @@ import { MessageItemComponent } from './messages/message-item/message-item.compo
 import { MessageEditComponent } from './messages/message-edit/message-edit.component';
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { DropdownDirective } from './dropdown/dropdown.directive';
-import {ContactService} from "./contacts/contact.service";
-import {AppRouting} from "./app-routing";
+import { ContactService } from "./contacts/contact.service";
+import { AppRouting } from "./app-routing";
 import { DocumentViewComponent } from './documents/document-view/document-view.component';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
-import {WindRefService} from "./wind-ref.service";
+import { WindRefService } from "./wind-ref.service";
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
-
+import { DndModule } from "ng2-dnd";
 
 @NgModule({
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [
     AppComponent,
     ContactsComponent,
@@ -46,10 +47,13 @@ import { ContactEditComponent } from './contacts/contact-edit/contact-edit.compo
     DocumentEditComponent,
     ContactEditComponent,
   ],
+
   imports: [
     BrowserModule,
     FormsModule,
-    AppRouting
+    ReactiveFormsModule,
+    AppRouting,
+    DndModule.forRoot(),
   ],
   providers: [ContactService, WindRefService],
   bootstrap: [AppComponent]
