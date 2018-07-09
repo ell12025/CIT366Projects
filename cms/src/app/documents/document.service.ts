@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Document } from "./document.model";
 import { MOCKDOCUMENTS } from "./MOCKDOCUMENTS";
-import {Subject} from "rxjs/internal/Subject";
+import { Subject } from "rxjs/internal/Subject";
+import { Http } from "@angular/http";
 
 @Injectable()
 export class DocumentService {
@@ -16,7 +17,7 @@ export class DocumentService {
 
 
   // Class constructor
-  constructor() {
+  constructor(private http: Http) {
     this.documents = MOCKDOCUMENTS;
     this.maxDocumentId = this.getMaxId();
   }
@@ -130,6 +131,21 @@ export class DocumentService {
   }
 
 
+  // PUT
+  // storeDocuments() {
+  //   this.http.put('https://cit366-c75e2.firebaseio.com/documents.json',
+  //     this.getDocuments());
+  // }
+  //
+  // // GET
+  // initDocuments() {
+  //   this.http.get('https://cit366-c75e2.firebaseio.com/documents.json').subscribe(
+  //     (response: Response) => {
+  //       const documents: Document[] = response.json();
+  //
+  //     }
+  //   )
+  // }
 
 
 

@@ -13,6 +13,7 @@ import { Subscription } from "rxjs/internal/Subscription";
 export class ContactListComponent implements OnInit, OnDestroy {
   contacts: Contact[];
   subscription: Subscription;
+  term: string;
 
   constructor(private contactService: ContactService, private router: Router,
               private route: ActivatedRoute) {
@@ -31,9 +32,8 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  onNewContact() {
-    this.router.navigate(['new'], {relativeTo: this.route});
+  onKeyPress(value: string) {
+    this.term = value;
   }
-
 
 }
