@@ -10,7 +10,7 @@
 
             <!-- Add the search box input field here -->
             <input type="text" class="form-control" placeholder="Enter search value"
-                   #searchBox (keypress)="onKeyPress(searchBox.value)">
+                   #searchBox (keyup)="onKeyPress(searchBox.value)">
 
 
             <div class="glyphicon glyphicon glyphicon-search input-group-addon" (click)="search(searchBox.value)"></div>

@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Message } from "./message.model";
-import { HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable()
 export class MessageService {
@@ -11,8 +11,8 @@ export class MessageService {
 
   // Class constructor
   constructor(private http: HttpClient) {
+
     this.getMessages();
-    this.maxMessageId = this.getMaxId();
 
   }
 

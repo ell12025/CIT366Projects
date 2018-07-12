@@ -1,7 +1,5 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Message} from "../message.model";
-
 import { MessageService } from "../message.service";
 
 @Component({

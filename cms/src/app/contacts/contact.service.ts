@@ -16,7 +16,7 @@ export class ContactService {
 
   // Class constructor
   constructor(private http: HttpClient) {
-    this.maxContactId = this.getMaxId();
+    this.getContacts();
   }
 
 
