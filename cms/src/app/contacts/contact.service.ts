@@ -1,31 +1,71 @@
 import { Injectable } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Contact } from "./contact.model";
-import { MOCKCONTACTS } from "./MOCKCONTACTS";
 import { Subject } from "rxjs/internal/Subject";
-import { Document } from "../documents/document.model";
-import { DocumentService } from "../documents/document.service";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable()
 export class ContactService {
   contactSelectedEvent = new EventEmitter<Contact>();
   contactListChangedEvent = new Subject<Contact[]>();
-  contacts: Contact[];
+  contacts: Contact[] = [];
   maxContactId: number;
   contactsListClone: Contact[];
 
 
 
   // Class constructor
-  constructor() {
-    this.contacts = MOCKCONTACTS;
+  constructor(private http: HttpClient) {
     this.maxContactId = this.getMaxId();
   }
 
 
   // Get all contacts
   getContacts() {
-    return this.contacts.slice();
+    // if(this.contacts) {
+    //   return this.contacts.slice();
+    // }
+
+    this.http.get<Contact[]>('https://cit366-c75e2.firebaseio.com/contacts.json').subscribe(
+      (contacts: Contact[]) => {
+        this.contacts = contacts;
+        this.maxContactId = this.getMaxId();
+        this.contacts = this.contacts.sort(this.compare);
+        this.contactListChangedEvent.next(this.contacts.slice());
+        return this.contacts.slice();
+      },
+      (error: any) => {
+        console.log("HTTP error: " + error.msgText);
+      }
+    );
+  }
+
+
+  // Compare function that is called by the getContacts()
+  compare(contactA: Contact, contactB: Contact) {
+    const conA = contactA.name.toUpperCase();
+    const conB = contactB.name.toUpperCase();
+    if(conA < conB) {
+      return -1;
+    }
+    if(conA > conB) {
+      return 1;
+    }
+    return 0;
+  }
+
+
+  // Store added contacts in database
+  storeContacts() {
+    const strContacts = JSON.stringify(this.contacts);
+    const header = new HttpHeaders( {
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.put('https://cit366-c75e2.firebaseio.com/contacts.json',
+      strContacts,
+      {headers: header}).subscribe(
+      () => this.contactListChangedEvent.next(this.contacts.slice()));
   }
 
 
@@ -76,7 +116,8 @@ export class ContactService {
     newContact.id = String(this.maxContactId);
     this.contacts.push(newContact);
     this.contactsListClone = this.contacts.slice();
-    this.contactListChangedEvent.next(this.contactsListClone);
+    // this.contactListChangedEvent.next(this.contactsListClone);
+    this.storeContacts();
   }
 
 
@@ -85,7 +126,7 @@ export class ContactService {
   // Update a contact
   updateContact(originalContact: Contact, newContact: Contact) {
     if(originalContact === null || originalContact === undefined
-    || newContact === null || newContact === undefined)
+      || newContact === null || newContact === undefined)
     {
       return;
     }
@@ -100,7 +141,8 @@ export class ContactService {
     newContact.id = originalContact.id;
     this.contacts[pos] = newContact;
     this.contactsListClone = this.contacts.slice();
-    this.contactListChangedEvent.next(this.contactsListClone);
+    // this.contactListChangedEvent.next(this.contactsListClone);
+    this.storeContacts();
   }
 
 
@@ -119,7 +161,8 @@ export class ContactService {
 
     this.contacts.splice(pos,1);
     this.contactsListClone = this.contacts.slice();
-    this.contactListChangedEvent.next(this.contacts.slice());
+    // this.contactListChangedEvent.next(this.contactsListClone);
+    this.storeContacts();
   }
 
 

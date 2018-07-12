@@ -25,7 +25,7 @@
         <div class="row">
           <div class="col-xs-12">
             <app-contact-item
-              *ngFor="let contact of contacts| contactsFilter:term" [contact]="contact" [id]="i" dnd-draggable
+              *ngFor="let contact of contacts| contactsFilter:[term]" [contact]="contact" [id]="i" dnd-draggable
               [dragEnabled]="true" [dragData]="contact" dropzones="contactGroup">
             </app-contact-item>
           </div>

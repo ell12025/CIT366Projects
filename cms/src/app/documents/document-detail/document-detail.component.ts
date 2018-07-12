@@ -28,7 +28,7 @@ export class DocumentDetailComponent implements OnInit {
         this.id = params['id'];
         this.document = this.documentService.getDocument(this.id);
       }
-      );
+    );
   }
 
   onEditDocument() {

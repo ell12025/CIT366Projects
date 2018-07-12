@@ -25,7 +25,7 @@ import { WindRefService } from "./wind-ref.service";
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { DndModule } from "ng2-dnd";
 import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
-import {HttpModule} from "@angular/http";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -49,6 +49,7 @@ import {HttpModule} from "@angular/http";
     DocumentEditComponent,
     ContactEditComponent,
     ContactsFilterPipe,
+
   ],
 
   imports: [
@@ -56,7 +57,7 @@ import {HttpModule} from "@angular/http";
     FormsModule,
     ReactiveFormsModule,
     AppRouting,
-    HttpModule,
+    HttpClientModule,
     DndModule.forRoot(),
   ],
   providers: [ContactService, WindRefService],
