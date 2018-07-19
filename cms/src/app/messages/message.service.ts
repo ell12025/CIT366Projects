@@ -26,6 +26,7 @@ export class MessageService {
         this.messages = messages;
         this.maxMessageId = this.getMaxId();
         this.messageChangeEvent.emit(this.messages.slice());
+        console.log(this.messages);
       },
       (error: any) => {
         console.log("HTTP error: " + error.msgText);
@@ -77,6 +78,8 @@ export class MessageService {
 
   // Add a message
   addMessage(message: Message) {
+    this.maxMessageId++;
+    message.id = String(this.maxMessageId);
     this.messages.push(message);
     // this.messageChangeEvent.emit(this.messages.slice());
     this.storeMessages();

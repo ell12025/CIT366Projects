@@ -78,9 +78,14 @@ export class ContactService {
       {
         return this.contacts[i];
       }
-    }
+
+
+      }
+
     return null;
   }
+
+
 
 
 

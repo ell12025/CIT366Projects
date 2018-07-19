@@ -21,7 +21,8 @@ export class MessageListComponent implements OnInit, OnDestroy {
     this.messageService.getMessages();
     this.contactService.getContacts();
 
-        this.messageSubscription = this.messageService.messageChangeEvent.subscribe(
+
+    this.messageSubscription = this.messageService.messageChangeEvent.subscribe(
           (messages: Message[]) => {
             this.messages = messages;
           });
